@@ -68,16 +68,10 @@ export const getProjectById = async (req, res) => {
 export const createProject = async (req, res) => {
   try {
     const {
-      title,
-      description,
-      image,
-      github,
-      liveDemo,
-      technologies,
-      category,
+   projectName,technology,image
     } = req.body;
 
-    if (!title || !description) {
+    if (!projectName || !technology) {
       return res.status(400).json({
         success: false,
         message: "Title and description are required.",
@@ -85,13 +79,7 @@ export const createProject = async (req, res) => {
     }
 
     const project = await Project.create({
-      title,
-      description,
-      image,
-      github,
-      liveDemo,
-      technologies,
-      category,
+   projectName,technology,image
     });
 
     return res.status(201).json({

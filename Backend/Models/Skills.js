@@ -2,20 +2,22 @@ import mongoose from "mongoose";
 
 const skillSchema = new mongoose.Schema(
   {
-    projectName: {
+    title: {
       type: String,
-      required: [true, "Project name is required."],
+      required: [true, "Skill title is required."],
       trim: true,
-      minlength: [2, "Project name must be at least 2 characters."],
-      maxlength: [100, "Project name cannot exceed 100 characters."],
+      minlength: [2, "Skill title must be at least 2 characters."],
+      maxlength: [100, "Skill title cannot exceed 100 characters."],
     },
 
-    technology: {
+    level: {
       type: String,
-      required: [true, "Technology is required."],
+      required: [true, "Skill level is required."],
       trim: true,
-      minlength: [2, "Technology name must be at least 2 characters."],
-      maxlength: [100, "Technology name cannot exceed 100 characters."],
+      enum: {
+        values: ["Beginner", "Intermediate", "Advanced", "Expert"],
+        message: "Level must be Beginner, Intermediate, Advanced, or Expert.",
+      },
     },
 
     image: {
@@ -31,7 +33,8 @@ const skillSchema = new mongoose.Schema(
 );
 
 // Indexes
-skillSchema.index({ technology: 1 });
+skillSchema.index({ title: 1 });
+skillSchema.index({ level: 1 });
 skillSchema.index({ createdAt: -1 });
 
-export default mongoose.model("Skill", skillSchema);
+export default mongoose.model("skill", skillSchema);

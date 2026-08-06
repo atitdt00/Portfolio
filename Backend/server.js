@@ -6,6 +6,9 @@ import cors from "cors";
 
 import connectDB from "./Config/db.js";
 import contactUserRoute from "./Routes/contactUserRoute.js";
+import projectRoute from "./Routes/projectRoute.js"
+import skillRoute from "./Routes/skillRoute.js"
+import authRoute from "./Routes/authRoute.js"
 
 const app = express();
 
@@ -18,6 +21,9 @@ app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.use("/api/contacts", contactUserRoute);
+app.use("/api/projects", projectRoute);
+app.use("/api/skills", skillRoute)
+app.use("/api/auth", authRoute);
 
 // Root Route
 app.get("/", (req, res) => {
